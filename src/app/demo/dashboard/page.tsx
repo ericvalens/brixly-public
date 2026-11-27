@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { DemoDataLabel } from "@/components/DemoDataLabel";
 import { dashboardStats, recentBatches, tankBoard, weekBars } from "@/data/demo";
@@ -11,15 +12,29 @@ const stateTone: Record<string, string> = {
 export default function DashboardDemoPage() {
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
+      <figure className="overflow-hidden rounded-[1.75rem] border border-line bg-[#f7f3ea]">
+        <Image
+          src="/images/floor.webp"
+          alt="Production floor with blending tanks and a bottle conveyor"
+          width={1280}
+          height={720}
+          priority
+          sizes="(min-width: 1024px) 960px, 100vw"
+          className="h-48 w-full object-cover object-[center_40%] sm:h-72"
+        />
+      </figure>
+      <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="max-w-2xl">
           <DemoDataLabel />
-          <h1 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">Floor dashboard</h1>
+          <h1 className="mt-4 font-display text-[2rem] leading-[1.15] tracking-tight sm:text-5xl">Floor dashboard</h1>
           <p className="mt-3 text-base leading-7 text-muted">
             A sample view of the day: counts, tanks, and a short list of batches. Every tile is a placeholder.
           </p>
         </div>
-        <Link href="/demo/summary" className="text-sm font-semibold text-pine underline-offset-4 hover:underline">
+        <Link
+          href="/demo/summary"
+          className="inline-flex min-h-11 items-center text-sm font-semibold text-pine underline-offset-4 hover:underline"
+        >
           Open batch EX-2041
         </Link>
       </header>
@@ -76,12 +91,28 @@ export default function DashboardDemoPage() {
       </section>
 
       <section className="overflow-hidden rounded-3xl border border-line bg-white">
-        <div className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="flex items-center justify-between gap-3 px-4 py-4 sm:px-5">
           <h2 className="font-display text-2xl">Recent example batches</h2>
           <DemoDataLabel />
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[36rem] text-left text-sm">
+        <ul className="divide-y divide-line md:hidden">
+          {recentBatches.map((batch) => (
+            <li key={batch.id} className="space-y-2 px-4 py-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-medium">{batch.id}</p>
+                  <p className="text-sm text-muted">{batch.product}</p>
+                </div>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${stateTone[batch.state]}`}>
+                  {batch.state}
+                </span>
+              </div>
+              <p className="text-sm tabular-nums text-muted">{batch.volume}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="hidden md:block">
+          <table className="w-full text-left text-sm">
             <thead className="border-y border-line bg-[#faf8f5] text-[11px] uppercase tracking-[0.14em] text-muted">
               <tr>
                 <th className="px-5 py-3 font-semibold">Batch</th>

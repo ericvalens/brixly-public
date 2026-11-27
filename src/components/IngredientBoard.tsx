@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { demoIngredients, type DemoIngredient, type IngredientKind } from "@/data/demo";
 import { DemoDataLabel } from "./DemoDataLabel";
@@ -100,21 +101,32 @@ export function IngredientBoard() {
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div className="max-w-2xl">
+      <header className="grid items-center gap-4 sm:grid-cols-[minmax(0,1fr)_10.5rem] sm:gap-6">
+        <div>
           <DemoDataLabel />
-          <h1 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">Ingredient list</h1>
+          <h1 className="mt-4 font-display text-[2rem] leading-[1.15] tracking-tight sm:text-5xl">Ingredient list</h1>
           <p className="mt-3 text-base leading-7 text-muted">
             A short example catalog for the walkthrough. Cards you add stay in this browser and are labeled as your samples.
           </p>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-pine px-5 text-sm font-semibold text-white hover:bg-pine-dark sm:w-auto"
+          >
+            Add a sample
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="rounded-full bg-pine px-5 py-2.5 text-sm font-semibold text-white hover:bg-pine-dark"
-        >
-          Add a sample
-        </button>
+        <figure className="mx-auto w-40 overflow-hidden rounded-[1.5rem] border border-line bg-[#f7f3ea] sm:w-full">
+          <Image
+            src="/images/lab.webp"
+            alt="A refractometer beside a beaker of juice"
+            width={1024}
+            height={1024}
+            sizes="(min-width: 640px) 168px, 160px"
+            priority
+            className="h-auto w-full"
+          />
+        </figure>
       </header>
 
       <input
@@ -129,11 +141,11 @@ export function IngredientBoard() {
 
       {open && (
         <div
-          className="fixed inset-0 z-40 flex items-end justify-center bg-[#17212b]/40 p-4 sm:items-center"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-[#17212b]/40 p-4 sm:items-center"
           onClick={() => setOpen(false)}
         >
           <div
-            className="w-full max-w-lg rounded-3xl bg-white p-6 shadow-xl"
+            className="max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-3xl bg-white p-5 shadow-xl sm:p-6"
             role="dialog"
             aria-modal="true"
             aria-labelledby="add-title"
@@ -183,14 +195,14 @@ export function IngredientBoard() {
               </div>
             </div>
             <div className="mt-6 flex justify-end gap-2">
-              <button type="button" onClick={() => setOpen(false)} className="rounded-full px-4 py-2 text-sm font-medium text-muted">
+              <button type="button" onClick={() => setOpen(false)} className="min-h-11 rounded-full px-4 text-sm font-medium text-muted">
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={addIngredient}
                 disabled={!draft.name.trim()}
-                className="rounded-full bg-pine px-5 py-2 text-sm font-semibold text-white disabled:opacity-40"
+                className="min-h-11 rounded-full bg-pine px-5 text-sm font-semibold text-white disabled:opacity-40"
               >
                 Save sample
               </button>
@@ -232,7 +244,7 @@ function IngredientGroup({
                   <button
                     type="button"
                     onClick={() => onDelete(item.id)}
-                    className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted"
+                    className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm font-medium text-muted"
                   >
                     Remove
                   </button>
@@ -243,18 +255,18 @@ function IngredientGroup({
                 )}
               </div>
             </div>
-            <dl className="mt-3 grid grid-cols-3 gap-3 text-sm">
-              <div>
+            <dl className="mt-3 grid grid-cols-3 gap-2 text-sm">
+              <div className="min-w-0">
                 <dt className="text-xs text-muted">Brix</dt>
-                <dd className="font-medium tabular-nums">{item.brixLabel}</dd>
+                <dd className="break-words font-medium tabular-nums">{item.brixLabel}</dd>
               </div>
-              <div>
+              <div className="min-w-0">
                 <dt className="text-xs text-muted">Acidity</dt>
-                <dd className="font-medium tabular-nums">{item.acidityLabel}</dd>
+                <dd className="break-words font-medium tabular-nums">{item.acidityLabel}</dd>
               </div>
-              <div>
+              <div className="min-w-0">
                 <dt className="text-xs text-muted">Density</dt>
-                <dd className="font-medium tabular-nums">{item.densityLabel}</dd>
+                <dd className="break-words font-medium tabular-nums">{item.densityLabel}</dd>
               </div>
             </dl>
           </article>

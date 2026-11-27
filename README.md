@@ -1,2 +1,32 @@
-# brixly-public
-Brixly Public — simplified demo of Brixly (no proprietary formulas)
+# Brixly Public
+
+A small, presentation-ready walkthrough of Brixly, the quality-standard workspace for juice blending. It keeps the main screens: a batch calculator, an ingredient list, and three example views of results, a floor dashboard, and a batch summary.
+
+Every figure in the app is **demo data**. The numbers are hardcoded placeholders for a walkthrough. They are sample labels, and they stay the same no matter what you type.
+
+## Run
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Build
+
+```bash
+npm install
+npm run build
+npm start
+```
+
+## Pages
+
+| Path | What it shows |
+| --- | --- |
+| `/` | Calculator walkthrough |
+| `/ingredients` | Example ingredient list |
+| `/demo/results` | Example blend results |
+| `/demo/dashboard` | Example floor dashboard |
+| `/demo/summary` | Example batch summary |

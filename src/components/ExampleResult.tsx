@@ -23,13 +23,13 @@ export function ExampleResult({
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
             {batch.id} · {batch.tank}
           </p>
-          <h3 className="mt-1 font-display text-2xl text-ink">{batch.title}</h3>
+          <h3 className="mt-1 text-balance font-display text-xl leading-snug text-ink sm:text-2xl">{batch.title}</h3>
           <p className="mt-1 max-w-xl text-sm text-muted">{batch.summary}</p>
         </div>
         <DemoDataLabel />
       </div>
 
-      <div className="grid gap-3 px-5 py-5 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 px-4 py-5 sm:px-6 lg:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.label} className="rounded-2xl bg-[#f7f5f1] px-4 py-3">
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
@@ -48,8 +48,8 @@ export function ExampleResult({
         <ul className="divide-y divide-line overflow-hidden rounded-2xl border border-line">
           {batch.adds.map((add) => (
             <li key={add.name} className="flex items-center justify-between gap-3 bg-white px-4 py-3 text-sm">
-              <span className="font-medium">{add.name}</span>
-              <span className="tabular-nums text-muted">
+              <span className="min-w-0 font-medium">{add.name}</span>
+              <span className="shrink-0 tabular-nums text-muted">
                 {add.amount} <span className="text-demo">example</span>
               </span>
             </li>

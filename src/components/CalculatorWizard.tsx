@@ -86,35 +86,37 @@ export function CalculatorWizard() {
 
   return (
     <section className="overflow-hidden rounded-3xl border border-line bg-white shadow-[0_24px_60px_-40px_rgba(23,33,43,0.5)]">
-      <div className="border-b border-line px-5 py-5 sm:px-6">
-        <ol className="flex flex-wrap gap-2">
-          {steps.map((label, index) => {
-            const number = index + 1;
-            const active = draft.step === number;
-            const done = draft.step > number;
-            return (
-              <li key={label}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (number < draft.step) patch({ step: number });
-                  }}
-                  disabled={number > draft.step}
-                  className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm ${
-                    active
-                      ? "bg-pine text-white"
-                      : done
-                        ? "bg-mist text-pine"
-                        : "bg-[#f6f3ee] text-muted"
-                  } disabled:cursor-default`}
-                >
-                  <span className="font-semibold tabular-nums">{done ? "✓" : number}</span>
-                  <span className="hidden sm:inline">{label}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ol>
+      <div className="border-b border-line">
+        <div className="scroll-row overflow-x-auto px-4 py-4 sm:px-6">
+          <ol className="flex w-max gap-2">
+            {steps.map((label, index) => {
+              const number = index + 1;
+              const active = draft.step === number;
+              const done = draft.step > number;
+              return (
+                <li key={label} className="shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (number < draft.step) patch({ step: number });
+                    }}
+                    disabled={number > draft.step}
+                    className={`flex min-h-11 items-center gap-2 rounded-full px-3 text-sm ${
+                      active
+                        ? "bg-pine text-white"
+                        : done
+                          ? "bg-mist text-pine"
+                          : "bg-[#f6f3ee] text-muted"
+                    } disabled:cursor-default`}
+                  >
+                    <span className="font-semibold tabular-nums">{done ? "✓" : number}</span>
+                    <span>{label}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </div>
 
       <div className="space-y-6 px-5 py-6 sm:px-6">
@@ -334,23 +336,23 @@ export function CalculatorWizard() {
         )}
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-4 sm:px-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-4 sm:px-6">
         <button
           type="button"
           onClick={() => patch({ step: Math.max(1, draft.step - 1) })}
           disabled={draft.step === 1}
-          className="rounded-full border border-line px-4 py-2 text-sm font-medium disabled:opacity-40"
+          className="min-h-11 rounded-full border border-line px-4 text-sm font-medium disabled:opacity-40"
         >
           Back
         </button>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap justify-end gap-2">
           <button
             type="button"
             onClick={() => {
               setDraft(sampleDraft);
               setQuery("");
             }}
-            className="rounded-full px-4 py-2 text-sm font-medium text-muted hover:text-ink"
+            className="min-h-11 rounded-full px-4 text-sm font-medium text-muted hover:text-ink"
           >
             Reset sample
           </button>
@@ -359,7 +361,7 @@ export function CalculatorWizard() {
               type="button"
               disabled={!canContinue}
               onClick={() => patch({ step: draft.step + 1 })}
-              className="rounded-full bg-pine px-5 py-2 text-sm font-semibold text-white hover:bg-pine-dark disabled:opacity-40"
+              className="min-h-11 rounded-full bg-pine px-5 text-sm font-semibold text-white hover:bg-pine-dark disabled:opacity-40"
             >
               {draft.step === 4 ? "Show example result" : "Continue"}
             </button>
@@ -367,7 +369,7 @@ export function CalculatorWizard() {
             <button
               type="button"
               onClick={() => patch({ step: 1 })}
-              className="rounded-full bg-pine px-5 py-2 text-sm font-semibold text-white hover:bg-pine-dark"
+              className="min-h-11 rounded-full bg-pine px-5 text-sm font-semibold text-white hover:bg-pine-dark"
             >
               Start again
             </button>

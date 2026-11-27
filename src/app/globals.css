@@ -20,6 +20,7 @@ html {
 }
 
 body {
+  overflow-x: clip;
   background: var(--color-paper);
   color: var(--color-ink);
 }
@@ -35,6 +36,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .field {
   width: 100%;
+  min-height: 2.75rem;
   border-radius: 0.75rem;
   border: 1px solid var(--color-line);
   background: white;
@@ -69,4 +71,9 @@ input[type="number"]::-webkit-inner-spin-button {
 .choice[data-active="true"] {
   border-color: var(--color-pine);
   background: var(--color-mist);
+}
+
+.scroll-row {
+  scrollbar-width: thin;
+  scrollbar-color: #d9d1c4 transparent;
 }

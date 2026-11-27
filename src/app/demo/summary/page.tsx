@@ -6,23 +6,23 @@ export default function SummaryDemoPage() {
     <div className="space-y-6">
       <header className="max-w-2xl">
         <DemoDataLabel />
-        <h1 className="mt-4 font-display text-4xl tracking-tight sm:text-5xl">Batch summary</h1>
+        <h1 className="mt-4 font-display text-[2rem] leading-[1.15] tracking-tight sm:text-5xl">Batch summary</h1>
         <p className="mt-3 text-base leading-7 text-muted">
           A sample close-out sheet for one batch. Targets and readings are both placeholders, printed side by side for the walkthrough.
         </p>
       </header>
 
       <article className="overflow-hidden rounded-3xl border border-line bg-white">
-        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line px-6 py-6">
+        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line px-4 py-5 sm:px-6 sm:py-6">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">{exampleLemonade.id}</p>
-            <h2 className="mt-1 font-display text-4xl">{exampleLemonade.product}</h2>
+            <h2 className="mt-1 font-display text-3xl sm:text-4xl">{exampleLemonade.product}</h2>
             <p className="mt-2 text-sm text-muted">{exampleLemonade.tank} · Morning shift sample</p>
           </div>
           <DemoDataLabel />
         </div>
 
-        <dl className="grid gap-4 border-b border-line px-6 py-5 sm:grid-cols-3">
+        <dl className="grid gap-4 border-b border-line px-4 py-5 sm:grid-cols-3 sm:px-6">
           <div>
             <dt className="text-xs uppercase tracking-[0.14em] text-muted">Started</dt>
             <dd className="mt-1 font-medium">08:10 · example</dd>
@@ -37,8 +37,28 @@ export default function SummaryDemoPage() {
           </div>
         </dl>
 
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[36rem] text-left text-sm">
+        <ul className="divide-y divide-line md:hidden">
+          {summaryRows.map((row) => (
+            <li key={row.spec} className="space-y-2 px-4 py-4">
+              <div className="flex items-center justify-between gap-3">
+                <p className="font-medium">{row.spec}</p>
+                <span className="shrink-0 rounded-full bg-mist px-2 py-0.5 text-xs font-semibold text-pine">{row.state}</span>
+              </div>
+              <dl className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <dt className="text-xs text-muted">Example target</dt>
+                  <dd className="mt-0.5 tabular-nums">{row.target}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs text-muted">Example reading</dt>
+                  <dd className="mt-0.5 tabular-nums">{row.reading}</dd>
+                </div>
+              </dl>
+            </li>
+          ))}
+        </ul>
+        <div className="hidden md:block">
+          <table className="w-full text-left text-sm">
             <thead className="bg-[#faf8f5] text-[11px] uppercase tracking-[0.14em] text-muted">
               <tr>
                 <th className="px-6 py-3 font-semibold">Spec</th>
@@ -62,14 +82,14 @@ export default function SummaryDemoPage() {
           </table>
         </div>
 
-        <div className="grid gap-4 px-6 py-6 lg:grid-cols-2">
+        <div className="grid gap-4 px-4 py-5 sm:px-6 sm:py-6 lg:grid-cols-2">
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">Sample additions</h3>
             <ul className="mt-3 space-y-2">
               {exampleLemonade.adds.map((add) => (
-                <li key={add.name} className="flex justify-between rounded-2xl bg-[#f7f5f1] px-4 py-3 text-sm">
-                  <span>{add.name}</span>
-                  <span className="tabular-nums text-muted">{add.amount}</span>
+                <li key={add.name} className="flex items-center justify-between gap-3 rounded-2xl bg-[#f7f5f1] px-4 py-3 text-sm">
+                  <span className="min-w-0">{add.name}</span>
+                  <span className="shrink-0 tabular-nums text-muted">{add.amount}</span>
                 </li>
               ))}
             </ul>
@@ -82,7 +102,7 @@ export default function SummaryDemoPage() {
           </div>
         </div>
 
-        <div className="grid gap-6 border-t border-line px-6 py-6 sm:grid-cols-2">
+        <div className="grid gap-6 border-t border-line px-4 py-5 sm:grid-cols-2 sm:px-6 sm:py-6">
           <div>
             <p className="text-xs uppercase tracking-[0.14em] text-muted">Prepared</p>
             <p className="mt-6 border-b border-line" />

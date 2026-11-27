@@ -87,7 +87,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <NavLinks />
           </div>
           <p className="mt-auto pt-8 text-xs leading-5 text-muted">
-            Public walkthrough. Figures on every screen are sample placeholders.
+            Figures on every screen are sample placeholders.
           </p>
         </aside>
 

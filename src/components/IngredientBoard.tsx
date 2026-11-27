@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { demoIngredients, type DemoIngredient, type IngredientKind } from "@/data/demo";
 import { DemoDataLabel } from "./DemoDataLabel";
 
-const storageKey = "brixly-public-custom-ingredients";
+const storageKey = "brixly-custom-ingredients";
 const emptyList: DemoIngredient[] = [];
 
 let cachedRaw: string | null = null;

@@ -14,9 +14,9 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Brixly — public walkthrough",
+  title: "Brixly",
   description:
-    "A presentation copy of Brixly. Screens and flow for juice blending, filled with demo data.",
+    "Quality standard workspace for juice blending. Screens and flow, filled with demo data.",
 };
 
 export default function RootLayout({
